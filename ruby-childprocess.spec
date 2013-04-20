@@ -3,12 +3,12 @@
 %define	gem_name childprocess
 Summary:	A simple and reliable gem for controlling external programs
 Name:		ruby-%{gem_name}
-Version:	0.3.6
+Version:	0.3.7
 Release:	1
 License:	MIT
 Group:		Development/Languages
 Source0:	http://rubygems.org/gems/%{gem_name}-%{version}.gem
-# Source0-md5:	8b8ac0c071e0bb555e2e6ecdb64b6d47
+# Source0-md5:	95c048433fefa1823cec8d913f7cdddf
 URL:		http://github.com/jarib/childprocess
 BuildRequires:	rpm-rubyprov
 BuildRequires:	rpmbuild(macros) >= 1.656
