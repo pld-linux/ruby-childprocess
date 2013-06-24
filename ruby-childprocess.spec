@@ -7,12 +7,12 @@
 %define	pkgname childprocess
 Summary:	A simple and reliable gem for controlling external programs
 Name:		ruby-%{pkgname}
-Version:	0.3.7
+Version:	0.3.9
 Release:	1
 License:	MIT
 Group:		Development/Languages
 Source0:	http://rubygems.org/gems/%{pkgname}-%{version}.gem
-# Source0-md5:	95c048433fefa1823cec8d913f7cdddf
+# Source0-md5:	9a739ab773bec1e359299d789232bedc
 URL:		http://github.com/jarib/childprocess
 BuildRequires:	rpm-rubyprov
 BuildRequires:	rpmbuild(macros) >= 1.665
@@ -23,7 +23,7 @@ BuildRequires:	ruby-rspec >= 2.0.0
 BuildRequires:	ruby-yard
 %endif
 Requires:	ruby-ffi < 2
-Requires:	ruby-ffi >= 1.0.6
+Requires:	ruby-ffi >= 1.0.11
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
