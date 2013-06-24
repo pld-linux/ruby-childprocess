@@ -1,18 +1,27 @@
 # TODO
 # - maybe clean wrong platform files?
-%define	gem_name childprocess
+#
+# Conditional build:
+%bcond_with	tests		# build without tests
+
+%define	pkgname childprocess
 Summary:	A simple and reliable gem for controlling external programs
-Name:		ruby-%{gem_name}
+Name:		ruby-%{pkgname}
 Version:	0.3.7
 Release:	1
 License:	MIT
 Group:		Development/Languages
-Source0:	http://rubygems.org/gems/%{gem_name}-%{version}.gem
+Source0:	http://rubygems.org/gems/%{pkgname}-%{version}.gem
 # Source0-md5:	95c048433fefa1823cec8d913f7cdddf
 URL:		http://github.com/jarib/childprocess
 BuildRequires:	rpm-rubyprov
-BuildRequires:	rpmbuild(macros) >= 1.656
-BuildRequires:	ruby-rspec
+BuildRequires:	rpmbuild(macros) >= 1.665
+%if %{with tests}
+BuildRequires:	ruby-rake < 0.10
+BuildRequires:	ruby-rake >= 0.9.2
+BuildRequires:	ruby-rspec >= 2.0.0
+BuildRequires:	ruby-yard
+%endif
 Requires:	ruby-ffi < 2
 Requires:	ruby-ffi >= 1.0.6
 BuildArch:	noarch
@@ -29,20 +38,23 @@ Group:		Documentation
 Requires:	%{name} = %{version}-%{release}
 
 %description doc
-Documentation for %{name}
+Documentation for %{name}.
 
 %prep
-%setup -q -n %{gem_name}-%{version}
+%setup -q -n %{pkgname}-%{version}
 
 %build
+%__gem_helper spec
+
 %if %{with tests}
 rspec spec
 %endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{ruby_vendorlibdir}
+install -d $RPM_BUILD_ROOT{%{ruby_vendorlibdir},%{ruby_specdir}}
 cp -a lib/* $RPM_BUILD_ROOT%{ruby_vendorlibdir}
+cp -p %{pkgname}-%{version}.gemspec $RPM_BUILD_ROOT%{ruby_specdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -50,5 +62,6 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README.md LICENSE
-%{ruby_vendorlibdir}/childprocess.rb
-%{ruby_vendorlibdir}/childprocess
+%{ruby_vendorlibdir}/%{pkgname}.rb
+%{ruby_vendorlibdir}/%{pkgname}
+%{ruby_specdir}/%{pkgname}-%{version}.gemspec
