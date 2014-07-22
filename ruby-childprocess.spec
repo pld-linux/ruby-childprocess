@@ -8,7 +8,7 @@
 Summary:	A simple and reliable gem for controlling external programs
 Name:		ruby-%{pkgname}
 Version:	0.5.0
-Release:	1
+Release:	2
 License:	MIT
 Group:		Development/Languages
 Source0:	http://rubygems.org/gems/%{pkgname}-%{version}.gem
