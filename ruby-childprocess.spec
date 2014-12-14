@@ -1,5 +1,3 @@
-# TODO
-# - maybe clean wrong platform files?
 #
 # Conditional build:
 %bcond_with	tests		# build without tests
@@ -8,7 +6,7 @@
 Summary:	A simple and reliable gem for controlling external programs
 Name:		ruby-%{pkgname}
 Version:	0.5.0
-Release:	3
+Release:	4
 License:	MIT
 Group:		Development/Languages
 Source0:	http://rubygems.org/gems/%{pkgname}-%{version}.gem
@@ -42,6 +40,11 @@ Documentation for %{name}.
 
 %prep
 %setup -q -n %{pkgname}-%{version}
+
+rm lib/childprocess/windows.rb
+rm -r lib/childprocess/windows
+rm lib/childprocess/unix/platform/*-solaris.rb
+rm lib/childprocess/unix/platform/*-macosx.rb
 
 %build
 %__gem_helper spec
